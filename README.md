@@ -6,12 +6,12 @@
 
 ## Проект завернут в Docker, поэтому для запуска достаточно выполнить следующие действия:
 
-1. Склонировать репозиторий: git clone https://github.com/buttheadgg/AuthorizationAndRegistration
-2. Перейти в директорию проекта: cd AuthorizationAndRegistration
-3. Собрать Docker образ: docker build -t vktest .
-4. Запустить контейнер: docker run -p 80:80 vktest
+1. Склонировать репозиторий: `git clone https://github.com/buttheadgg/AuthorizationAndRegistration`
+2. Перейти в директорию проекта: `cd AuthorizationAndRegistration`
+3. Собрать Docker образ: `docker build -t vktest .`
+4. Запустить контейнер: `docker run -p 80:80 vktest`
 После 4 шага нужно перейти в браузере по ссылке [http://localhost](http://localhost).
 
 ## Для проекта используется база данных на виртуальном хостинге, поэтому пользователи могут быть уже зарегистрированы и остаются в БД.
 
-## Также проект размещен на хостинге, посмотреть можно по ссылке: [https://vk.tcherepanov.ru](vk.tcherepanov.ru)
+## Также проект размещен на хостинге, посмотреть можно по ссылке: [vk.tcherepanov.ru]( https://vk.tcherepanov.ru)
