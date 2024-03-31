@@ -3,23 +3,42 @@
 require_once __DIR__ . '/../helpers.php';
 
 $email = $_POST['email'];
-$password = $_POST['password'];
+$password = trim($_POST['password']);
 
-
-
+$checkUser = findUser($email);
+if($checkUser){
+    addValidationError('email', 'Пользователь с такой почтой уже зарегистрирован');
+    setOldValue('email', $email);
+    redirect('/register.php');
+    return;
+}
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
     setOldValue('email', $email);
     addValidationError('email', 'Указана неправильная почта');
+    redirect('/register.php');
+    return;
 }
 
-if (empty($password)){
+if ($password===''){
     addValidationError('password', 'Пароль пустой');
+    redirect('/register.php');
+    return;
+}
+
+$passwordCheckStatus = checkPasswordStrength($password);
+if ($passwordCheckStatus == 'weak') {
+    addValidationError('password', "Пароль легкий. В пароле должны быть буквы разного регистра и цифры");
+    redirect('/register.php');
+    return;
 }
 
 if (!empty($_SESSION['validation'])) {
+    setOldValue('email', $email);
     redirect('/register.php');
+    return;
 }
+
 
 $pdo = getPDO();
 

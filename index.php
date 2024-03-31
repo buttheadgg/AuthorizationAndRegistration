@@ -19,9 +19,7 @@ require_once __DIR__ . '/src/helpers.php';
 <form class="card" action="src/actions/login.php" method="post">
     <h2 class="form-title">Авторизация</h2>
 
-    <?php if(hasMessage('error')): ?>
-    <div class="notice error"> <?php echo getMessage('error') ?> </div>
-    <?php endif; ?>
+
     <label for="email">
         E-mail
         <input
