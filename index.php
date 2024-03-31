@@ -16,7 +16,7 @@ require_once __DIR__ . '/src/helpers.php';
     <link rel="stylesheet" href="assets/app.css">
 <body>
 
-<form class="card" action="src/actions/login.php" method="post">
+<form class="card" action="src/actions/authorize.php" method="post">
     <h2 class="form-title">Авторизация</h2>
 
 

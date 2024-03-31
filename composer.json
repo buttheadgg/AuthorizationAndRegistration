@@ -1,0 +1,6 @@
+{
+    "name": "timof/vkauth",
+    "require": {
+        "firebase/php-jwt": "^6.10"
+    }
+}

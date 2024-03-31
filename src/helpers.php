@@ -60,37 +60,22 @@ function checkPasswordStrength($password)
 {
     $passwordCheckStatus = 'weak';
     $length = strlen($password);
-    $hasLetters = preg_match('@[a-zA-Z]@', $password);
+    $hasLowercaseLetters = preg_match('@[a-z]@', $password);
+    $hasUppercaseLetters = preg_match('@[A-Z]@', $password);
     $hasDigits = preg_match('@[0-9]@', $password);
     $hasSpecialChars = preg_match('@[^\w]@', $password);
 
-    if ($length >= 8 && $hasLetters && $hasDigits) {
+    if ($length >= 8 && $hasLowercaseLetters && $hasUppercaseLetters && $hasDigits) {
         $passwordCheckStatus = 'good';
     }
 
-    if ($length >= 12 && $hasLetters && $hasDigits && $hasSpecialChars) {
+    if ($length >= 8 && $hasLowercaseLetters && $hasUppercaseLetters && $hasDigits && $hasSpecialChars) {
         $passwordCheckStatus = 'perfect';
     }
 
     return $passwordCheckStatus;
 }
 
-function setMessage(string $key, string $message): void
-{
-    $_SESSION['message'][$key] = $message;
-}
-
-function hasMessage(string $key): bool
-{
-    return isset($_SESSION['message'][$key]);
-}
-
-function getMessage(string $key)
-{
-    $message = $_SESSION['message'][$key] ?? '';
-    unset($_SESSION['message'][$key]);
-    return $message;
-}
 
 function getPDO(): PDO
 {
@@ -126,6 +111,6 @@ function checkAuth(): void
 function checkGuest(): void
 {
     if (!isset($_SESSION['user']['id'])) {
-        redirect('/home.php');
+        redirect('/feed.php');
     }
 }

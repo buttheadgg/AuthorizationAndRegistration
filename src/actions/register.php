@@ -6,6 +6,9 @@ $email = $_POST['email'];
 $password = trim($_POST['password']);
 
 $checkUser = findUser($email);
+
+header('Content-Type: application/json');
+
 if($checkUser){
     addValidationError('email', 'Пользователь с такой почтой уже зарегистрирован');
     setOldValue('email', $email);
@@ -28,7 +31,7 @@ if ($password===''){
 
 $passwordCheckStatus = checkPasswordStrength($password);
 if ($passwordCheckStatus == 'weak') {
-    addValidationError('password', "Пароль легкий. В пароле должны быть буквы разного регистра и цифры");
+    addValidationError('password', "weak_password");
     redirect('/register.php');
     return;
 }
@@ -52,9 +55,17 @@ $params = [
 $stmt = $pdo -> prepare($query);
 
 try{
-    $stmt -> execute($params);
+    $stmt = $pdo->prepare($query);
+    $stmt->execute($params);
+    $userId = $pdo->lastInsertId();
+
+    echo json_encode([
+        'user_id' => (int)$userId,
+        'password_check_status' => $passwordCheckStatus
+    ]);
+
 }catch (\Exception $e){
-    die($e->getMessage());
+    echo json_encode(['error' => $e->getMessage()]);
+    return;
 }
 
-redirect('/index.php');
