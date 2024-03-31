@@ -5,9 +5,6 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 use \Firebase\JWT\JWT;
 
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
 
 $email = $_POST['email'] ?? null;
 $password = $_POST['password'] ?? null;
